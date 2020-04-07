@@ -1,0 +1,22 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  name: prom-datasource
+  namespace: cloudpak-monitoring
+spec:
+  datasources:
+    - basicAuthUser: grafana-test
+      access: proxy
+      editable: true
+      secureJsonData:
+        basicAuthPassword: topsecret
+      name: Prometheus
+      url: 'https://prometheus-k8s.openshift-monitoring.svc.cluster.local:9091'
+      jsonData:
+        timeInterval: 5s
+        tlsSkipVerify: true
+      basicAuth: true
+      isDefault: true
+      version: 1
+      type: prometheus
+  name: prom-datasource.yaml
