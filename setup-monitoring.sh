@@ -52,11 +52,11 @@ fi
 }
 
 set::oauth() {
-touch -a /etc/origin/master/htpasswd
-htpasswd /etc/origin/master/htpasswd grafana
-sed -ie 's|AllowAllPasswordIdentityProvider|HTPasswdPasswordIdentityProvider\n      file: /etc/origin/master/htpasswd|' /etc/origin/master/master-config.yaml
+# touch -a /etc/origin/master/htpasswd
+# htpasswd /etc/origin/master/htpasswd grafana
+# sed -ie 's|AllowAllPasswordIdentityProvider|HTPasswdPasswordIdentityProvider\n      file: /etc/origin/master/htpasswd|' /etc/origin/master/master-config.yaml
 oc adm policy add-cluster-role-to-user cluster-reader grafana
-systemctl restart atomic-openshift-master-api.service
+# systemctl restart atomic-openshift-master-api.service
 }
 
 # deploy node exporter
@@ -75,6 +75,9 @@ mv "${dashboard_file}.bak" "${dashboard_file}"
 [[ -n ${yaml} ]] || yaml="grafana.yaml"
 ((setoauth)) && set::oauth || echo "skip oauth"
 
+oc new-project prometheus
+oc new-app -f prometheus.yaml
+oc rollout status statefulset prometheus -n prometheus
 oc new-project grafana
 oc process -f "${yaml}" |oc create -f -
 oc rollout status deployment/grafana

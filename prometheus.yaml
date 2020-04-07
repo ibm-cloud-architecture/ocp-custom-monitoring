@@ -9,9 +9,9 @@ metadata:
     iconClass: fa fa-cogs
     tags: "monitoring,prometheus, alertmanager,time-series"
 parameters:
-- description: The namespace to instantiate prometheus under. Defaults to 'kube-system'.
+- description: The namespace to instantiate prometheus under. Defaults to 'prometheus'.
   name: NAMESPACE
-  value: kube-system
+  value: prometheus
 - description: The location of the proxy image
   name: IMAGE_PROXY
   value: openshift/oauth-proxy:v1.0.0

@@ -4,6 +4,11 @@ This document provides instructions and resources for installing a custom Promet
 
 This method has been tested on OpenShift 3.11
 
+###The following configuration will deploy a custom Prometheus and Grafana to separate namespaces in your cluster. Run the deployment script:
+```
+./setup-monitoring.sh -n prometheus -p prometheus
+```
+
 
 # 1. Deploy Prometheus
 
