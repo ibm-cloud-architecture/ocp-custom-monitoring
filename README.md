@@ -1,3 +1,10 @@
+# OCP Prometheus + Grafana Installer
+
+This document provides instructions and resources for installing a custom Prometheus and Grafana instance on your OpenShift cluster using Templates (not Operators).
+
+This method has been tested on OpenShift 3.11
+
+
 # Prometheus for OpenShift
 
 This directory contains example components for running either an operational Prometheus setup for your OpenShift cluster, or deploying a standalone secured Prometheus instance for configurating yourself.
