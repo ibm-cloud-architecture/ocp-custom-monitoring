@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: cpak-monitoring-og
+  namespace: cloudpak-monitoring
+spec:
+  targetNamespaces:
+  - cloudpak-monitoring

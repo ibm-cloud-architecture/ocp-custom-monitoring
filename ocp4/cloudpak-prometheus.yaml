@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus-k8s
+  labels:
+    prometheus: k8s
+  namespace: cloudpak-monitoring
+spec:
+  replicas: 1
+  serviceAccountName: prometheus-k8s
+  securityContext: {}
+  serviceMonitorSelector: {}
+  ruleSelector: {}
+  alerting:
+    alertmanagers:
+      - namespace: openshift-monitoring
+        name: alertmanager-main
+        port: web

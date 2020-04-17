@@ -25,7 +25,7 @@ done
 usage() {
 echo "
 USAGE
- setup-grafana.sh -n <datasource_name> -a [optional: -p <prometheus_namespace> -s <prometheus_serviceaccount> -g <graph_granularity> -y <yaml> -e]
+ setup-monitoring.sh -n <datasource_name> -a [optional: -p <prometheus_namespace> -s <prometheus_serviceaccount> -g <graph_granularity> -y <yaml> -e]
 
  switches:
    -n: grafana datasource name
