@@ -75,9 +75,9 @@ mv "${dashboard_file}.bak" "${dashboard_file}"
 [[ -n ${yaml} ]] || yaml="grafana.yaml"
 ((setoauth)) && set::oauth || echo "skip oauth"
 
-oc new-project prometheus
+# oc new-project prometheus
 oc new-app -f prometheus.yaml
-oc rollout status statefulset prometheus -n prometheus
+oc rollout status statefulset prometheus -n kube-system
 oc new-project grafana
 oc process -f "${yaml}" |oc create -f -
 oc rollout status deployment/grafana

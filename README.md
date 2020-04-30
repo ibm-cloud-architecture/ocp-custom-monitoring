@@ -6,7 +6,7 @@ This method has been tested on OpenShift 3.11
 
 ###The following configuration will deploy a custom Prometheus and Grafana to separate namespaces in your cluster. Run the deployment script:
 ```
-./setup-monitoring.sh -n prometheus -p prometheus
+./setup-monitoring.sh -n prometheus -p kube-system
 ```
 
 
