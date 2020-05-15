@@ -395,14 +395,14 @@ spec:
         "alignLevel": null
       }
     }
-  ],
+    ],
   "refresh": false,
   "schemaVersion": 23,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
-  },
+    },
   "time": {
     "from": "now-30m",
     "to": "now"
