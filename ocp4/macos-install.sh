@@ -50,3 +50,5 @@ oc apply -f grafana-dashboard-node-rsrc-use.yaml
 oc apply -f grafana-dashboard-prometheus.yaml
 
 oc apply -f grafana-dashboards.yaml
+
+oc apply -f grafana-dashboards-custom.yaml
