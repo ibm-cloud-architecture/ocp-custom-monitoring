@@ -70,7 +70,7 @@ spec:
       "pluginVersion": "7.0.0-0021a61fpre",
       "targets": [
         {
-          "expr": "topk(5, sort_desc((sum by (container_name) (container_memory_working_set_bytes{namespace=\"zen\", name!~\".*prometheus.*\", name!~\".*redis.*\", image!=\"\", container_name!=\"POD\"}) / sum by (container_name) (container_spec_memory_limit_bytes{namespace=\"zen\", name!~\".*prometheus.*\", name!~\".*redis.*\", image!=\"\", container_name!=\"POD\"})) * 100) >= 50 and sort_desc((sum by (container_name) (container_memory_working_set_bytes{namespace=\"zen\", name!~\".*prometheus.*\", name!~\".*redis.*\", image!=\"\", container_name!=\"POD\"}) / sum by (container_name) (container_spec_memory_limit_bytes{namespace=\"zen\", name!~\".*prometheus.*\", name!~\".*redis.*\", image!=\"\", container_name!=\"POD\"})) * 100) <= 100)",
+          "expr": "100*sum(container_memory_usage_bytes{namespace="zen",container!=""}) by (pod) / sum(kube_pod_container_resource_limits_memory_bytes{namespace="zen",pod=~"(spark| zen|rstudio|spawner|portal-main|ax-).*"}) by (pod)",
           "format": "time_series",
           "instant": true,
           "interval": "",
