@@ -51,4 +51,4 @@ oc apply -f grafana-dashboard-prometheus.yaml
 
 oc apply -f grafana-dashboards.yaml
 
-oc apply -f grafana-dashboards-custom.yaml
+oc apply -f grafana-dashboard-custom.yaml
