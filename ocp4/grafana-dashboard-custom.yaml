@@ -8,24 +8,8 @@ metadata:
 spec:
   json: |
     {
-        "__inputs": [
-
-        ],
-        "__requires": [
-
-        ],
         "annotations": {
     "list": [
-      {
-        "$$hashKey": "object:7",
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }
     ]
   },
   "editable": true,
