@@ -22,4 +22,26 @@ oc get routes
 
 #oc apply -f prometheus-datasource.yaml 
 
+#oc apply -f grafana-dashboard-cluster-total.yaml
 
+#oc apply -f grafana-dashboard-etcd.yaml
+
+#oc apply -f grafana-dashboard-k8s-resources-cluster.yaml
+
+#oc apply -f grafana-dashboard-k8s-resources-namespace.yaml
+
+#oc apply -f grafana-dashboard-k8s-resources-node.yaml
+
+#oc apply -f grafana-dashboard-k8s-resources-pod.yaml
+
+#oc apply -f grafana-dashboard-k8s-resources-workload.yaml
+
+#oc apply -f grafana-dashboard-k8s-resources-workloads-namespace.yaml
+
+#oc apply -f grafana-dashboard-node-cluster-rsrc-use.yaml
+
+#oc apply -f grafana-dashboard-node-rsrc-use.yaml
+
+#oc apply -f grafana-dashboard-prometheus.yaml
+
+#oc apply -f grafana-dashboards.yaml
