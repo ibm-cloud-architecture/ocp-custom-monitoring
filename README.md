@@ -1,47 +1,20 @@
-# OCP Prometheus + Grafana Installer
+# OCP Prometheus + Grafana Custom Setup
 
-This document provides instructions and resources for installing a custom Prometheus and Grafana instance on your OpenShift cluster using Templates (not Operators).
+This document provides instructions and resources for installing a custom Prometheus and Grafana instance on your OpenShift cluster.
 
-This method has been tested on OpenShift 3.11
+Refer to the appropriate folder for your openshift version. The OCP 3.11 folder uses templates to install a custom Prometheus and Grafana on your cluster, while the OCP 4 folder uses Operators.
 
-###The following configuration will deploy a custom Prometheus and Grafana to separate namespaces in your cluster. Run the deployment script:
-```
-./setup-monitoring.sh -n prometheus -p kube-system
-```
+If you are just looking to get up and running quickly, run the following:
 
-
-# 1. Deploy Prometheus
-
-This directory contains example components for running either an operational Prometheus setup for your OpenShift cluster, or deploying a standalone secured Prometheus instance for configurating yourself.
-
-## Prometheus for Operations
-
-The `prometheus.yaml` template creates a Prometheus instance preconfigured to gather OpenShift and Kubernetes platform and node metrics and report them to admins. It is protected by an OAuth proxy that only allows access for users who have view access to the `kube-system` namespace.
-
-To deploy, run:
+### For OpenShift 3.11: 
 
 ```
-$ oc new-app -f prometheus.yaml
+./ocp311/setup-monitoring.sh -n prometheus -p kube-system
 ```
 
-You may customize where the images (built from `openshift/prometheus` and `openshift/oauth-proxy`) are pulled from via template parameters.
 
-# 2. Deploy Grafana
-
-This example creates a custom Grafana instance preconfigured to gather Prometheus openshift metrics.
-It uses "OAuth" token to login openshift Prometheus.
-
-## Available Dashboards
-- openshift cluster metrics
-- node exporter metrics
-
-## To run grafana and deploy dashboards
-Note: make sure to have openshift prometheus deployed (possibly, with node exporter).
-(https://github.com/openshift/origin/tree/master/examples/prometheus)
-
-### Run the deployment script
+### For OpenShift 4.3
 ``` 
-./setup-grafana.sh -n <any_datasorce_name> -a -e
+./ocp4/install.sh
 ```
-for more info ```./setup-grafana.sh -h```
 
