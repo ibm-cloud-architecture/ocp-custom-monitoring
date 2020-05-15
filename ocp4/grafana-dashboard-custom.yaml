@@ -8,9 +8,8 @@ metadata:
 spec:
   json: |
     {
-        "annotations": {
-    "list": [
-    ]
+  "annotations": {
+    "list": []
   },
   "editable": true,
   "gnetId": null,
@@ -435,6 +434,6 @@ spec:
   "title": "ICP4D-DS",
   "uid": "1sTtB7-mz",
   "version": 29
-    }
+}
 
   name: grafana-dashboard-custom.json
