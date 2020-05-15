@@ -6,6 +6,9 @@ oc apply -f grafana-setup/cpak-monitoring-og.yaml
 
 oc apply -f grafana-setup/cpak-grafana-sub.yaml 
 
+echo "Waiting for Operator to spin up"
+sleep 10
+
 oc apply -f grafana-setup/cloudpak-grafana.yaml
 
 echo "Waiting for Operator to spin up Grafana resources"
