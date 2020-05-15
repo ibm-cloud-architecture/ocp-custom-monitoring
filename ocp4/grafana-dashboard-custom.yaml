@@ -8,18 +8,20 @@ metadata:
 spec:
   json: |
     {
-  "annotations": {
-    "list": []
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "id": 10,
-  "links": [],
-  "panels": [
-    {
-      "datasource": "$datasource",
-      "fieldConfig": {
+        "annotations": {
+            "list": [
+
+            ]
+        },
+        "editable": true,
+        "gnetId": null,
+        "graphTooltip": 0,
+        "id": 10,
+        "links": [],
+        "panels": [
+            {
+                "datasource": "$datasource",
+                "fieldConfig": {
         "defaults": {
           "mappings": [],
           "max": 100,
