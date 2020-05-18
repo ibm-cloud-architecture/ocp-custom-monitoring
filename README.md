@@ -15,6 +15,9 @@ If you are just looking to get up and running quickly, run the following:
 
 ### For OpenShift 4.3
 ``` 
-./ocp4/install.sh
+MacOS Installer: ./ocp4/macos-install.sh
 ```
 
+``` 
+Linux Installer: ./ocp4/linux-install.sh
+```
