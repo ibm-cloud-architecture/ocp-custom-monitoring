@@ -1,3 +1,5 @@
+![CP4D Dashboard Image](assets/grafana-banner.png)
+
 # OCP Prometheus + Grafana Custom Setup
 
 This document provides instructions and resources for installing a custom Prometheus and Grafana instance on your OpenShift cluster.
