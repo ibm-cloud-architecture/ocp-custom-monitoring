@@ -1,3 +1,7 @@
+# This repo has moved!
+
+Please visit https://github.com/ibm-cloud-architecture/ocp-custom-monitoring for the latest changes.
+
 # OCP Prometheus + Grafana Custom Setup
 
 This document provides instructions and resources for installing a custom Prometheus and Grafana instance on your OpenShift cluster.
