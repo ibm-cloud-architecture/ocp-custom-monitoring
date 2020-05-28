@@ -16,6 +16,11 @@ This script has been tested on OCP 4.3
 ```
 
 ### Add Cloud Pak for Data Dashboard
+optional: If your Cloud Pak for Data namespace is not 'zen', run the following:
+``` 
+sed -i 's/namespace=\\"zen\\"/namespace=\\"your_namespace\\"/g' cpak-dashboards/grafana-dashboard-cp4d.yaml
+``` 
+Then run this:
 ``` 
 oc apply -f cpak-dashboards/grafana-dashboard-cp4d.yaml
 ```
