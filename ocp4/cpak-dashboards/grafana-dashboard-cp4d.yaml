@@ -162,7 +162,7 @@ spec:
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(5, sum(max(kube_pod_labels{namespace=\"zen\"}) by (label_release,pod) * on(pod) group_right(label_release) max(kube_pod_container_resource_requests_cpu_cores{namespace=\"zen\"}) by(pod)) by (label_release))",
+          "expr": "topk(10, sum(max(kube_pod_labels{namespace=\"zen\"}) by (label_release,pod) * on(pod) group_right(label_release) max(kube_pod_container_resource_requests_cpu_cores{namespace=\"zen\"}) by(pod)) by (label_release))",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -174,7 +174,7 @@ spec:
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Top 5 CPU Consuming Services",
+      "title": "Top 10 CPU Consuming Services",
       "tooltip": {
         "shared": false,
         "sort": 0,
@@ -360,7 +360,7 @@ spec:
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(5, sum(max(kube_pod_labels{namespace=\"zen\"}) by (label_release,pod) * on(pod) group_right(label_release) max(kube_pod_container_resource_requests_memory_bytes{namespace=\"zen\"}) by(pod)) by (label_release) / 1e+9)",
+          "expr": "topk(10, sum(max(kube_pod_labels{namespace=\"zen\"}) by (label_release,pod) * on(pod) group_right(label_release) max(kube_pod_container_resource_requests_memory_bytes{namespace=\"zen\"}) by(pod)) by (label_release) / 1e+9)",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -373,7 +373,7 @@ spec:
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Top 5 memory consuming services",
+      "title": "Top 10 memory consuming services",
       "tooltip": {
         "shared": false,
         "sort": 0,
@@ -777,7 +777,7 @@ spec:
       "timezone": "",
       "title": "CP4D Monitor",
       "uid": "aa1sTtB7-mzaa",
-      "version": 19
+      "version": 22
     }
 
   name: grafana-dashboard-cp4d.json
