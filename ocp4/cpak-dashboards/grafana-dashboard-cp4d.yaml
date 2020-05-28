@@ -120,6 +120,7 @@ spec:
       "timeFrom": null,
       "timeShift": null,
       "title": "Container OOM Warning Meter",
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -161,21 +162,11 @@ spec:
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(max(kube_pod_labels{namespace=\"zen\"}) by (label_release,pod) * on(pod) group_right(label_release) max(container_cpu_usage_seconds_total{namespace=\"zen\"}) by(pod)) by (label_release)",
-          "format": "time_series",
-          "hide": true,
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{label_release}}",
-          "refId": "A"
-        },
-        {
-          "expr": "topk(5, pod:container_cpu_usage:sum{namespace=\"zen\"})",
+          "expr": "topk(5, sum(max(kube_pod_labels{namespace=\"zen\"}) by (label_release,pod) * on(pod) group_right(label_release) max(kube_pod_container_resource_requests_cpu_cores{namespace=\"zen\"}) by(pod)) by (label_release))",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
-          "legendFormat": "{{pod}}",
+          "legendFormat": "{{label_release}}",
           "refId": "B"
         }
       ],
@@ -189,6 +180,7 @@ spec:
         "sort": 0,
         "value_type": "individual"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -228,7 +220,7 @@ spec:
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fill": 1,
+      "fill": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -237,19 +229,20 @@ spec:
       },
       "id": 20,
       "legend": {
-        "alignAsTable": false,
+        "alignAsTable": true,
         "avg": false,
         "current": true,
         "hideEmpty": true,
         "hideZero": true,
         "max": false,
         "min": false,
-        "show": false,
+        "rightSide": true,
+        "show": true,
         "total": false,
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
       "options": {},
@@ -263,24 +256,25 @@ spec:
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(changes(kube_pod_container_status_restarts_total[60m]))",
+          "expr": "changes(kube_pod_container_status_restarts_total{namespace=\"zen\"}[60m])",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
+          "legendFormat": "{{container}}",
+          "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Container Restart Count",
+      "title": "Container Restarts in Last Hour",
       "tooltip": {
-        "shared": true,
+        "shared": false,
         "sort": 0,
         "value_type": "individual"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -366,12 +360,12 @@ spec:
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(5, sum(container_memory_working_set_bytes{namespace=\"zen\",container!=\"\"}) by (pod)) / 1e+6",
+          "expr": "topk(5, sum(max(kube_pod_labels{namespace=\"zen\"}) by (label_release,pod) * on(pod) group_right(label_release) max(kube_pod_container_resource_requests_memory_bytes{namespace=\"zen\"}) by(pod)) by (label_release) / 1e+9)",
           "format": "time_series",
           "hide": false,
           "instant": true,
           "intervalFactor": 1,
-          "legendFormat": "{{pod}}",
+          "legendFormat": "{{label_release}}",
           "refId": "B"
         }
       ],
@@ -385,6 +379,7 @@ spec:
         "sort": 0,
         "value_type": "individual"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -399,7 +394,7 @@ spec:
         {
           "decimals": null,
           "format": "none",
-          "label": "MB",
+          "label": "GB",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -467,15 +462,6 @@ spec:
       "pluginVersion": "6.2.4",
       "targets": [
         {
-          "expr": "100 * (sum(container_cpu_usage_seconds_total{namespace=\"zen\"}) by (pod))",
-          "format": "time_series",
-          "hide": true,
-          "instant": true,
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}}",
-          "refId": "B"
-        },
-        {
           "expr": "topk(5, 100 * (sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{namespace=\"zen\"}) by (pod) / sum(kube_pod_container_resource_limits_cpu_cores{namespace=\"zen\"}) by (pod)))",
           "format": "time_series",
           "hide": false,
@@ -483,20 +469,274 @@ spec:
           "intervalFactor": 1,
           "legendFormat": "{{pod}}",
           "refId": "A"
-        },
-        {
-          "expr": "",
-          "format": "time_series",
-          "hide": true,
-          "intervalFactor": 1,
-          "refId": "C"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
       "title": "Container CPU Limit Warning Meter",
+      "transparent": true,
       "type": "gauge"
-    }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 3,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 24,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "expr": "namespace:container_cpu_usage:sum{namespace='zen'}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{namespace}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CP4D CPU Usage in Last 60 Minutes",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "GB",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 3,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "id": 26,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "expr": "sum by(namespace) (container_memory_working_set_bytes{namespace=\"zen\",container=\"\",pod!=\"\"}) / 1e+9",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CP4D Memory Usage in Last 60 Minutes",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "GB",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 22,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "expr": "sum by (code) (rate(apiserver_request_count{verb=~\"POST|PUT|DELETE|PATCH|GET|LIST|WATCH\"}[60m]))",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{code}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Rate of API Calls in Last 60 Minutes",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+        }
       ],
       "refresh": false,
       "schemaVersion": 18,
@@ -506,7 +746,7 @@ spec:
         "list": []
       },
       "time": {
-        "from": "now-30m",
+        "from": "now-1h",
         "to": "now"
       },
       "timepicker": {
@@ -535,9 +775,9 @@ spec:
         ]
       },
       "timezone": "",
-      "title": "CP4D Monitor-Test",
-      "uid": "a1sTtB7-mzaa",
-      "version": 10
+      "title": "CP4D Monitor",
+      "uid": "aa1sTtB7-mzaa",
+      "version": 19
     }
 
   name: grafana-dashboard-cp4d.json
