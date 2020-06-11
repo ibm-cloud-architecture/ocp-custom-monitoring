@@ -66,5 +66,4 @@ oc apply -f ocp-dashboards/grafana-dashboards.yaml
 
 echo "Setup complete! You can access your dashboards using the following routes: "
 oc get routes -n cloudpak-monitoring 
-echo 'Your Grafana admin login is root:Passw0rd!'
-
+echo 'Your Grafana admin login is root:Passw0rd!:
