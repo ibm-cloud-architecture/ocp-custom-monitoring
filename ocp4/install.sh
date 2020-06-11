@@ -19,18 +19,20 @@ oc expose svc grafana-service -n cloudpak-monitoring
 if [ "$(uname)" == "Darwin" ]; then
 
   oc get secret prometheus-k8s-htpasswd -n openshift-monitoring -o jsonpath='{.data.auth}{"\n"}' | base64 -D > /tmp/htpasswd-tmp
-
-  htpasswd -s -b  /tmp/htpasswd-tmp grafana-test topsecret
-
-  oc patch secret prometheus-k8s-htpasswd -n openshift-monitoring -p "{\"data\":{\"auth\":\"$(base64 /tmp/htpasswd-tmp)\"}}"
+  oldpass=$(cat /tmp/htpasswd-tmp)
+  addpass='grafana-test:{SHA}EiAf5eICiDvUX8l+hzZuoFGD4OQ='
+  newpass="${oldpass}\n${addpass}"
+  newpass_enc=$(echo -e $newpass | base64)
+  oc patch secret prometheus-k8s-htpasswd -n openshift-monitoring -p "{\"data\":{\"auth\":\"$newpass_enc\"}}"
 
 else
   
   oc get secret prometheus-k8s-htpasswd -n openshift-monitoring -o jsonpath='{.data.auth}{"\n"}' | base64 -d > /tmp/htpasswd-tmp
-
-  htpasswd -s -b  /tmp/htpasswd-tmp grafana-test topsecret
-
-  oc patch secret prometheus-k8s-htpasswd -n openshift-monitoring -p "{\"data\":{\"auth\":\"$(base64 -w0 /tmp/htpasswd-tmp)\"}}"
+  oldpass=$(cat /tmp/htpasswd-tmp)
+  addpass='grafana-test:{SHA}EiAf5eICiDvUX8l+hzZuoFGD4OQ='
+  newpass="${oldpass}\n${addpass}"
+  newpass_enc=$(echo -e $newpass | base64 -w0)
+  oc patch secret prometheus-k8s-htpasswd -n openshift-monitoring -p "{\"data\":{\"auth\":\"$newpass_enc\"}}"
 
 fi
 
