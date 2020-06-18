@@ -1,3 +1,11 @@
+# Grafana Installer
+
+For a quick setup of a customizable Grafana, run the following:
+```
+./install.sh
+```
+
+
 # OCP Prometheus + Grafana Installer
 
 This document provides instructions and resources for installing a custom Prometheus and Grafana instance on your OpenShift cluster using Templates (not Operators).

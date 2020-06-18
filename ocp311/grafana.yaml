@@ -21,7 +21,7 @@ parameters:
   value: ""
 - description: The namespace to instantiate heapster under. Defaults to 'grafana'.
   name: NAMESPACE
-  value: grafana
+  value: cloudpak-monitoring
 - description: The session secret for the proxy
   name: SESSION_SECRET
   generate: expression
