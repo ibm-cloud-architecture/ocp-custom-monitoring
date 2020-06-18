@@ -5,6 +5,9 @@ For a quick setup of a customizable Grafana, run the following:
 ./install.sh
 ```
 
+# Cloud Pak Dashboard
+
+To add a Cloud Pak Dashboard to your new Grafana instance, use cloud-pak-monitoring.json. You can either upload it or paste the contents directly into the Grafana Import tab.
 
 # OCP Prometheus + Grafana Installer
 
